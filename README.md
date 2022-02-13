@@ -1,7 +1,7 @@
 [![CI](https://github.com/DPeshkoff/http_proxy/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/DPeshkoff/http_proxy/actions/workflows/CI.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/DPeshkoff/http_proxy) ![GitHub](https://img.shields.io/github/license/DPeshkoff/http_proxy)
 
 # http_proxy
-HW task for Internet Application Security course of Technopark (third semester).
+HW task for Internet Application Security course of Technopark (third semester, spring 2022).
 
 ### Usage
 
