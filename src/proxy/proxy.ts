@@ -41,6 +41,10 @@ class ProxyServer {
             );
         });
     }
+
+    async stop() {
+        this.server.close();
+    }
 }
 
 export default ProxyServer;
