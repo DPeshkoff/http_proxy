@@ -1,0 +1,32 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "unused-imports",
+      "eslint-plugin-prettier"
+    ],
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "eslint-config-prettier"
+    ],
+    "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "single"],
+        "quote-props": ["error", "consistent-as-needed"],
+        "indent": ["error", 4, { "CallExpression": {"arguments": "first"}, "ObjectExpression": "first" }],
+        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+        "no-duplicate-imports": "error",
+        "linebreak-style": "off",
+        "no-var": "error",
+        "no-redeclare": "error",
+        "unused-imports/no-unused-imports": "error",
+        "no-unused-vars": "warn",
+        "max-len": ["error", { "code": 105 }],
+        "no-irregular-whitespace": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
+    }
+}

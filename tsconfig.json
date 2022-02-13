@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2020",
+    /* Modules */
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    /* Type Checking */
+    "strict": true,
+    /* Completeness */
+    "skipLibCheck": true
+  },
+  "include": ["src", "test"],
+  "lib": ["es2020"]
+}

@@ -1,0 +1,8 @@
+proxy:
+  port: 8080
+
+api:
+  port: 8000
+  requests:
+    timeout: 600000 #10 minutes
+    max: 100 #100 requests
