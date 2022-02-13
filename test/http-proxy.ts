@@ -429,6 +429,6 @@ QUnit.module('http_proxy', async (assert) => {
     });
     proxy_test.then(() => {
         proxy.stop();
-    })
+    });
 
 });
