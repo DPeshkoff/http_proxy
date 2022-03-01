@@ -2,6 +2,7 @@ import ProxyServer from './proxy/proxy';
 import ApiServer from './apiserver/apiserver';
 import path from 'path';
 import chalk from 'chalk';
+import Database from './db/db';
 
 /***
  *      _______           _                                        _      _    _ __          __ __
@@ -17,8 +18,9 @@ import chalk from 'chalk';
 const configPath = path.join(__dirname, '../config.yml');
 
 console.log(chalk.yellow('Starting HTTP-proxy...'));
-const API = new ApiServer(configPath);
-const Proxy = new ProxyServer(configPath);
+const DB = new Database(configPath);
+const API = new ApiServer(configPath, DB);
+const Proxy = new ProxyServer(configPath, DB);
 
 const promise = new Promise((resolve) => {
     Proxy.run();

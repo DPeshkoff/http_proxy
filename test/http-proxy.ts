@@ -3,10 +3,12 @@ import QUnit from 'qunit';
 import ProxyServer from '../src/proxy/proxy';
 import {spawn} from 'child_process';
 import chalk from 'chalk';
+import Database from '../src/db/db';
 
 QUnit.module('http_proxy', async (assert) => {
     const configPath = path.join(__dirname, '../config.yml');
-    const proxy = new ProxyServer(configPath);
+    const DB = new Database(configPath);
+    const proxy = new ProxyServer(configPath, DB);
     proxy.run();
 
     /*

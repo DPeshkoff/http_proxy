@@ -3,25 +3,28 @@ import initConfig from '../config/config';
 import chalk from 'chalk';
 import fs from 'fs';
 import tls from 'tls';
-import {generateCertificate, checkKey} from '../utils/cert';
+import {generateCertificate} from '../utils/cert';
+import Database from '../db/db';
 
 class ProxyServer {
     private server: http.Server;
     private port: string;
-    private key: string;
+    private key!: string;
     private certs: Map<string, string>;
 
     /**
    * @constructor
    */
-    constructor(configPath: string) {
-        this.server = http.createServer((req, res) => this.handle(req, res));
+    constructor(configPath: string, db : Database) {
+        this.server = http.createServer((req, res) => this.handle(req, res, db));
         this.port = initConfig(configPath, 'proxy').port;
-        this.key = checkKey()!;
+        //this.key = checkKey()!;
         this.certs = new Map();
     }
 
-    private handle(req: http.IncomingMessage, res: http.ServerResponse): void {
+    private async handle(req: http.IncomingMessage, 
+        res: http.ServerResponse, 
+        db: Database): Promise<void> {
         const headers = req.headers;
         delete headers['proxy-connection'];
         const options: http.RequestOptions = {
@@ -31,6 +34,8 @@ class ProxyServer {
             headers,
         };
 
+        await db.putRequest(options);
+
         if (req.url?.split(':')[0] === 'https') {
             res.write('HTTP/1.1 200 Connection Established\r\n' +
                 'Proxy-Agent: HTTP_PROXY\r\n' +
@@ -38,7 +43,7 @@ class ProxyServer {
 
             const tlsOptions = {
                 key: this.key,
-                cert: this.getCertificate(req.url.split('.')[0].split('//')[1]),
+                //cert: this.getCertificate(req.url.split('.')[0].split('//')[1]),
                 isServer: true,
             };
             const answer = http.request(options, (request: http.IncomingMessage) => {

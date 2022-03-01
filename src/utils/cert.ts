@@ -16,7 +16,7 @@ export const checkKey = () => {
 export const generateKey = () => {
     const gen_key = spawn('../../sh/gen_ca.sh');
 
-    gen_key.stdout.once('data', (data) => {
+    gen_key.stdout?.once('data', (data) => {
         fs.writeFile('./cert.key', data, (err) => {
             if (err) {
                 console.error(err.message);
@@ -29,7 +29,7 @@ export const generateCertificate = (serverName: string) => {
     const gen_cert = spawn('../../sh/gen_cert.sh', 
                            [serverName, (Math.floor(Math.random() * 1000000000000)).toString()]);
 
-    gen_cert.stdout.once('data', (data) => {
+    gen_cert.stdout?.once('data', (data) => {
         fs.writeFile(`./certs/${serverName}.crt`, data, (err) => {
             if (err) {
                 console.error(err.message);

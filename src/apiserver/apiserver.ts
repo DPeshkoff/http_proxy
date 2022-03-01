@@ -2,6 +2,7 @@ import express from 'express';
 import initConfig from '../config/config';
 import rateLimit, { RateLimitRequestHandler } from 'express-rate-limit';
 import chalk from 'chalk';
+import Database from '../db/db';
 
 // /requests – список запросов
 // /requests/id – вывод 1 запроса
@@ -17,7 +18,7 @@ class ApiServer {
     /**
    * @constructor
    */
-    constructor(configPath: string) {
+    constructor(configPath: string, db: Database) {
         const config = initConfig(configPath, 'api');
         this.port = config.port;
         this.limit = rateLimit({
@@ -30,21 +31,21 @@ class ApiServer {
         this.server.get(
             '/requests',
             (req: express.Request, res: express.Response) => {
-                res.send('TODO!');
+                res.send(JSON.stringify(db.getRequests()));
             }
         );
 
         this.server.get(
             '/requests/:id',
             (req: express.Request, res: express.Response) => {
-                res.send('TODO!');
+                res.send(JSON.stringify(db.getRequest(Number(req.params.id))));
             }
         );
 
         this.server.post(
             '/repeat/:id',
             (req: express.Request, res: express.Response) => {
-                res.send('TODO!');
+                res.send(JSON.stringify(db.getRequest(Number(req.params.id))));
             }
         );
 
